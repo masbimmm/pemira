@@ -52,6 +52,9 @@ app.get('/', function(req, res){
   res.render('dashboard');
 })
 
+app.get('*', function(req, res){
+  res.render('404');
+})
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
