@@ -54,6 +54,9 @@ app.use('/', require('./routes/index.js'));
 app.get('*', function(req, res){
   res.render('home/404',{layout: "home/layout"});
 })
+app.post('*', function(req, res){
+  res.render('home/404',{layout: "home/layout"});
+})
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
