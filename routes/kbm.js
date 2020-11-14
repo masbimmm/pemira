@@ -1,24 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const artikelModel = require('../models/Artikel');
+const kbmModel = require('../models/modelKBM');
 var fs = require('fs'); 
 var path = require('path'); 
 var multer = require('multer'); 
-
-
-router.get('/:judul', function(req, res){
-    var judul = req.params.judul.replace(/\s\s+/g, ' ');
-    if (/\s/.test(judul)) {
-        res.redirect(judul.replace(/\s/g, '+'));
-    }else{
-        if (judul.match(/\+\++/g)) {
-            res.redirect(judul.replace(/\+\++/g, '+'));
-        }else{
-            judul = judul.replace(/\+/g, ' ');
-            res.end(judul);
-        }
-    }
-});
 
 var storage = multer.diskStorage({ 
     destination: (req, file, cb) => { 
@@ -31,12 +16,12 @@ var storage = multer.diskStorage({
   
 var upload = multer({ storage: storage }); 
 router.get('/', (req, res) => { 
-    artikelModel.find({}, (err, items) => { 
+    kbmModel.find({}, (err, items) => { 
         if (err) { 
             console.log(err); 
         } else { 
             if (req.user) {
-            	res.render('app', { user:req.user, items: items, layout: "dashboard/admin/layout" }); 
+            	res.render('dashboard/admin/kbm', { user:req.user, items: items, layout: "dashboard/admin/layout" }); 
             }else{
             	res.redirect('/dashboard');
             }
@@ -54,14 +39,15 @@ router.post('/', upload.single('image'), (req, res, next) => {
         if (uid == _idu) {
           var obj = { 
               uid: _idu, 
-              judul: req.body.judul, 
-              isi: req.body.isi, 
+              nama: req.body.nama, 
+              detail: req.body.detail,
+              site: req.body.site, 
               img: { 
                   data: fs.readFileSync(path.join('public/uploads/' + req.file.filename)), 
                   contentType: 'image/png'
               } 
           } 
-          artikelModel.create(obj, (err, item) => { 
+          kbmModel.create(obj, (err, item) => { 
               if (err) { 
                   console.log(err); 
               } else { 

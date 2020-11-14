@@ -1,11 +1,11 @@
 var mongoose = require('mongoose'); 
   
-var artikelSchema = new mongoose.Schema({ 
-    judul:{
+var xkasd = new mongoose.Schema({ 
+    nama:{
         type:String,
         required:true
     },
-    isi:{
+    detail:{
         type:String,
         required:true
     },
@@ -13,6 +13,10 @@ var artikelSchema = new mongoose.Schema({
     { 
         data: Buffer, 
         contentType: String 
+    },
+    site:{
+        type:String,
+        required:false
     },
     uid:{
         type:String,
@@ -25,4 +29,4 @@ var artikelSchema = new mongoose.Schema({
 }); 
   
   
-module.exports = new mongoose.model('artikel', artikelSchema); 
+module.exports = new mongoose.model('kbm', xkasd); 

@@ -47,6 +47,7 @@ app.use('/dashboard/panitia', require('./routes/panitia.js'));
 app.use('/dashboard/user', require('./routes/user.js'));
 app.use('/dashboard', require('./routes/login.js'));
 app.use('/artikel', require('./routes/artikel.js'));
+app.use('/kbm', require('./routes/kbm.js'));
 app.use('/', require('./routes/index.js'));
 // app.use('/dashboard/user', require('./routes/user.js'));
 
