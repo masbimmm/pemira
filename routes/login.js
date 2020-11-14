@@ -28,10 +28,10 @@ var xcheck = {
     }
 }; 
 // Login Page
-router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
+router.get('/login', forwardAuthenticated, (req, res) => res.render('login/login', {layout:'login/layout'}));
 
 // Register Page
-router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
+router.get('/register', forwardAuthenticated, (req, res) => res.render('login/register', {layout:'login/layout'}));
 
 // Register
 router.post('/register', (req, res) => {
@@ -141,6 +141,8 @@ router.get('/', function(req,res){
       res.redirect('/dashboard/admin');
     }else if(status_user=='user'){
       res.redirect('/dashboard/user');
+    }else if(status_user=='panitia'){
+      res.redirect('/dashboard/panitia');
     }else{
       req.logout();
       req.flash('success_msg', 'No permission');

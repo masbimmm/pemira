@@ -3065,5 +3065,9 @@ li.parsley-required,
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-
+.thum {
+    height: 380px;
+    max-height: 380px;
+    object-fit: cover;
+}
 /* End Back to top button style */

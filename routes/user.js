@@ -8,7 +8,8 @@ router.get('/', function(req, res, next){
 		var status_user = user.status_user.toLowerCase();
 		if (status_user=='user') {
 			res.render('dashboard/user/index', {
-	        user: req.user
+	        user: req.user,
+	        layout: "dashboard/user/layout"
 	      });
 		}else{
 			res.redirect('../dashboard');

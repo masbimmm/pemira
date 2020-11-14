@@ -4,9 +4,8 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-
-const app = express();
 require('./config/passport')(passport);
+const app = express();
 
 mongoose.connect('mongodb://localhost/masbim', {
     useNewUrlParser: true,
@@ -19,7 +18,6 @@ mongoose.connect('mongodb://localhost/masbim', {
     }
 });
 const db = mongoose.connection;
-
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 app.use( express.static( "public" ) );
@@ -43,17 +41,17 @@ app.use(function(req, res, next) {
   res.locals.error = req.flash('error');
   next();
 });
+
 app.use('/dashboard/admin', require('./routes/admin.js'));
+app.use('/dashboard/panitia', require('./routes/panitia.js'));
 app.use('/dashboard/user', require('./routes/user.js'));
 app.use('/dashboard', require('./routes/login.js'));
+app.use('/artikel', require('./routes/artikel.js'));
+app.use('/', require('./routes/index.js'));
 // app.use('/dashboard/user', require('./routes/user.js'));
 
-app.get('/', function(req, res){
-  res.render('dashboard');
-})
-
 app.get('*', function(req, res){
-  res.render('404');
+  res.render('home/404',{layout: "home/layout"});
 })
 
 const PORT = process.env.PORT || 5000;

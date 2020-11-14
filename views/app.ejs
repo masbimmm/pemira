@@ -1,0 +1,54 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+	<meta charset="UTF-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<title>Image Uploading</title> 
+</head> 
+
+<body> 
+	<h1>To Upload Image on mongoDB</h1> 
+	<hr> 
+	<div> 
+		<form action="/artikel/" method="POST" enctype="multipart/form-data"> 
+			<div> 
+				<label for="judul">judul</label> 
+				<input type="hidden" id="uid" placeholder="uid" value="<%=user._id %>" name="uid" required> 
+				<input type="text" id="judul" placeholder="judul" value="" name="judul" required> 
+			</div> 
+			<div> 
+				<label for="isi">Image isiription</label> 
+				<textarea id="isi" name="isi" value="" rows="2"placeholder="isiription" required> </textarea> 
+			</div> 
+			<div> 
+				<label for="image">Upload Image</label> 
+				<input type="file" id="image"
+					name="image" value="" required> 
+			</div> 
+			<div> 
+				<button type="submit">Submit</button> 
+			</div> 
+		</form> 
+	</div> 
+
+	<hr> 
+
+	<h1>Uplaoded Images</h1> 
+	<div> 
+		<% items.forEach(function(image) { %> 
+		<div> 
+			<div> 
+				<img src="data:image/<%=image.img.contentType%>;base64, 
+					<%=image.img.data.toString('base64')%>"> 
+				<div> 
+					<h5><%= image.judul %></h5> 
+					<p><%= image.isi %></p> 
+				</div> 
+			</div> 
+		</div> 
+		<% }) %> 
+	</div> 
+</body> 
+
+</html> 
